@@ -13,7 +13,7 @@ class Alien(Sprite):
         self.my_timer = Timer(2)
 
         # Initalize an alien image
-        self.image = pygame.image.load('images/alien_3-1.png')
+        self.image = pygame.image.load('images/Alien_3-1.png')
         self.rect = self.image.get_rect()
 
         # Start each new alien near the top left of the screen.
@@ -47,9 +47,6 @@ class Alien(Sprite):
         #for x in range(2):
         self.screen.blit(self.image, self.rect)
 
-
-
-# class Alien1:
-#     def __init__(self, point_value, image):
-#         # Inheirit the Alien class
-#
+    class Alien1(Alien):
+        def __init__(self, point_value, image):
+            self.point_value = 100

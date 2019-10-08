@@ -2,7 +2,7 @@ import pygame
 
 
 class Timer:
-    def __init__(self, frames, wait=1000, frameindex=0, step=1, looponce=False):  # imagerect frames
+    def __init__(self, frames, wait=500, frameindex=0, step=1, looponce=False):  # imagerect frames
         self.frames = frames
         self.wait = wait
         self.frameindex = frameindex
