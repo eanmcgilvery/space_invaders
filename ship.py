@@ -1,6 +1,6 @@
 import pygame
+import math
 from pygame.sprite import Sprite
-
 
 class Ship(Sprite):
 
@@ -10,14 +10,26 @@ class Ship(Sprite):
         self.screen = screen
         self.ai_settings = ai_settings
 
-        # Load the ship image, and get its rect.
-        self.image = pygame.image.load('images/player ship.png')
+        # Load the alien image, and set its rect attribute.
+        self.images = []
+        self.images.append(pygame.image.load('images/player_ship.png'))
+        self.images.append(pygame.image.load('images/player_death-1.png'))
+        self.images.append(pygame.image.load('images/player_death-2.png'))
+        self.images.append(pygame.image.load('images/player_death-3.png'))
+        self.images.append(pygame.image.load('images/player_death-4.png'))
+        self.images.append(pygame.image.load('images/player_death-5.png'))
+        self.images.append(pygame.image.load('images/player_death-6.png'))
+        self.images.append(pygame.image.load('images/player_death-7.png'))
+        self.images.append(pygame.image.load('images/player_death-8.png'))
+
+        self.index = 0
+        self.image = self.images[self.index]
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
         # Start each new ship at the bottom center of the screen.
         self.rect.centerx = self.screen_rect.centerx
-        self.rect.bottom = self.screen_rect.bottom
+        self.rect.bottom = self.screen_rect.bottom - 20
 
         # Store a decimal value for the ship's center.
         self.center = float(self.rect.centerx)
@@ -26,20 +38,32 @@ class Ship(Sprite):
         self.moving_right = False
         self.moving_left = False
 
+        self.boom = False
+
     def center_ship(self):
         """Center the ship on the screen."""
         self.center = self.screen_rect.centerx
 
-    def update(self):
+    def update(self, stats):
         """Update the ship's position, based on movement flags."""
         # Update the ship's center value, not the rect.
-        if self.moving_right and self.rect.right < self.screen_rect.right:
-            self.center += self.ai_settings.ship_speed_factor
-        if self.moving_left and self.rect.left > 0:
-            self.center -= self.ai_settings.ship_speed_factor
+        if stats.game_pause:
+            if self.moving_right and self.rect.right < self.screen_rect.right:
+                self.center += self.ai_settings.ship_speed_factor
+            if self.moving_left and self.rect.left > 0:
+                self.center -= self.ai_settings.ship_speed_factor
 
         # Update rect object from self.center.
         self.rect.centerx = self.center
+
+        # Get ship to blow up
+        if self.boom:
+            self.index += .1
+            if self.index >= len(self.images):
+                self.index = 0
+                self.boom = False
+                stats.game_pause = True
+            self.image = self.images[math.floor(self.index)]
 
     def blitme(self):
         """Draw the ship at its current location."""
