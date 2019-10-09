@@ -14,16 +14,16 @@ class Bunker(Sprite):
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
-        # Start each new ship at the bottom center of the screen.
+        # Bnker is pt to bottom of the screen
         self.rect.centerx = self.screen_rect.centerx
         self.rect.bottom = self.screen_rect.bottom - 100
 
         # Store a decimal value for the ship's center.
         self.center = float(self.rect.centerx)
 
-        # Movement flags.
-        self.moving_right = False
-        self.moving_left = False
+        # # Movement flags.
+        # self.moving_right = False
+        # self.moving_left = False
 
     def center_ship(self):
         """Center the ship on the screen."""

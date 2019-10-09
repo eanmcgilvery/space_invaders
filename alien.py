@@ -19,6 +19,7 @@ class Alien1(Sprite):
         self.images.append(pygame.image.load('images/Alien_1-2.png'))
         self.images.append(pygame.image.load('images/alien_death-1.png'))
         self.images.append(pygame.image.load('images/alien_death-2.png'))
+        self.images.append(pygame.image.load('images/alien_death-3.png'))
 
 
 
@@ -80,6 +81,7 @@ class Alien2(Sprite):
         self.images.append(pygame.image.load('images/Alien_2-2.png'))
         self.images.append(pygame.image.load('images/alien_death-1.png'))
         self.images.append(pygame.image.load('images/alien_death-2.png'))
+        self.images.append(pygame.image.load('images/alien_death-3.png'))
 
         self.index = 0
         self.image = self.images[self.index]
@@ -140,6 +142,8 @@ class Alien3(Sprite):
         self.images.append(pygame.image.load('images/Alien_3-2.png'))
         self.images.append(pygame.image.load('images/alien_death-1.png'))
         self.images.append(pygame.image.load('images/alien_death-2.png'))
+        self.images.append(pygame.image.load('images/alien_death-3.png'))
+
 
         self.index = 0
         self.image = self.images[self.index]
