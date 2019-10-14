@@ -15,14 +15,13 @@ class Scoreboard:
 
         # Font settings for scoring information.
         self.text_color = (255, 255, 255)
-        self.font = pygame.font.SysFont(None, 48)
+        self.font = pygame.font.SysFont(None, 30)
 
         # Prepare the initial score images.
         self.prep_score()
         self.prep_high_score()
         self.prep_level()
         self.prep_ships()
-
 
         self.score_rect = self.score_image.get_rect()
         self.high_score_image = self.font.render("HIGH SCORE: ",
@@ -31,13 +30,13 @@ class Scoreboard:
         self.high_score_rect = self.high_score_image.get_rect()
         self.level_image = self.font.render("LEVEL: ", True, self.text_color, self.ai_settings.bg_color)
         self.level_rect = self.level_image.get_rect()
-        self.score_image = self.font.render("SCORE: ", True, self.text_color, self.ai_settings.bg_color)
+        self.score_image = self.font.render("PLAYER: ", True, self.text_color, self.ai_settings.bg_color)
 
     def prep_score(self):
         """Turn the score into a rendered image."""
         rounded_score = int(round(self.stats.score, -1))
         score_str = "{:,}".format(rounded_score)
-        self.score_image = self.font.render("SCORE: " + score_str, True, self.text_color,
+        self.score_image = self.font.render("PLAYER: " + score_str, True, self.text_color,
                                             self.ai_settings.bg_color)
 
         # Display the score at the top right of the screen.

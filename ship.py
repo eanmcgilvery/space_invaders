@@ -2,6 +2,7 @@ import pygame
 import math
 from pygame.sprite import Sprite
 
+
 class Ship(Sprite):
 
     def __init__(self, ai_settings, screen):

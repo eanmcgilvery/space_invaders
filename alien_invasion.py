@@ -1,4 +1,3 @@
-
 import pygame
 from pygame.sprite import Group
 
@@ -6,10 +5,12 @@ from settings import Settings
 from game_stats import GameStats
 from scoreboard import Scoreboard
 from button import Button
+from button import h_score
 from ship import Ship
 import game_functions as gf
 from main_menu import Start
 from alien import UFO
+
 
 def run_game():
     clock = pygame.time.Clock()
@@ -22,6 +23,7 @@ def run_game():
 
     # Make the Play button.
     play_button = Button(ai_settings, screen, "Play")
+    high_score_button = h_score(ai_settings, screen, "HIGH SCORES")
 
     # Create an instance to store game statistics, and a scoreboard.
     stats = GameStats(ai_settings)
@@ -51,7 +53,7 @@ def run_game():
 
         ship.update(stats)
         gf.update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, alien_bullets,
-                         play_button, bunkers, start, ufos)
+                         play_button, high_score_button, bunkers, start, ufos)
         clock.tick(60)
 
 

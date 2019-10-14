@@ -128,7 +128,7 @@ def create_bunkers(ai_settings, screen, bunkers):
     create_bunker(ai_settings, screen, bunkers, 1000)
 
 
-def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, alien_bullets, play_button,
+def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, alien_bullets, play_button, high_score,
                   bunkers, start, ufos):
     """Update images on the screen, and flip to the new screen."""
     # Redraw the screen, each pass through the loop.
@@ -138,8 +138,8 @@ def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, alien_b
     for bullet in bullets.sprites():
         bullet.draw_bullet()
 
-    for alien_bullet in alien_bullets.sprites():
-        alien_bullet.draw_bullet()
+    for a_bullet in alien_bullets.sprites():
+        a_bullet.draw_bullet()
 
     ship.blitme()
     aliens.draw(screen)
@@ -153,6 +153,7 @@ def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, alien_b
         screen.fill((0, 0, 0))
         start.start_blit(screen, stats)
         play_button.draw_button()
+        high_score.draw_button()
 
     # update text file
     stats.update_txt()
@@ -170,9 +171,9 @@ def update_bullets(ai_settings, screen, stats, sb, aliens, bullets, bunkers, ali
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
 
-    for alien_bullet in alien_bullets.copy():
-        if alien_bullet.rect.bottom >= 800:
-            alien_bullets.remove(alien_bullet)
+    for a_bullet in alien_bullets.copy():
+        if a_bullet.rect.bottom >= 800:
+            alien_bullets.remove(a_bullet)
 
     check_bullet_alien_collisions(ai_settings, screen, stats, sb, aliens, bullets, bunkers, alien_bullets, ufos)
 
@@ -228,8 +229,8 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, aliens, bullet
         for aliens in collisions.values():
             for a in aliens:
                 a.boom = True
-                # inv = pygame.mixer.Sound('sound/invaderkilled.wav')
-                # inv.play()
+                inv = pygame.mixer.Sound('sound_effects/explosion_sound.wav')
+                inv.play()
                 stats.score += a.score * len(aliens)
                 sb.prep_score()
         check_high_score(stats, sb)
@@ -302,8 +303,8 @@ def update_aliens(ai_settings, screen, stats, sb, ship, aliens, alien_bullets):
         ship_hit(stats, sb)
         stats.game_pause = False
         ship.boom = True
-        # ex = pygame.mixer.Sound('sound/explosion.wav')
-        # ex.play()
+        ex = pygame.mixer.Sound('sound_effects/explosion_sound.wav')
+        ex.play()
 
     # Look for aliens hitting the bottom of the screen.
     check_aliens_bottom(screen, stats, sb, aliens)

@@ -26,7 +26,7 @@ class Start:
         self.inv_btn.centerx = screen.get_rect().centerx
         self.inv_btn.centery = screen.get_rect().centery - 200
 
-        # I
+        #
         self.score = pygame.image.load('images/menu.png')
         self.score_btn = self.score.get_rect()
         self.score_btn.centerx = screen.get_rect().centerx
